@@ -2,12 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import trafficMeister from './service';
 import registerServiceWorker from './registerServiceWorker';
+import RootComponent from './components/RootComponent';
 
 registerServiceWorker();
-
-const RootComponent = () => (
-  <div>Traffic App</div>
-);
 
 ReactDOM.render(
   <RootComponent/>,
