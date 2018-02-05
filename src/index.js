@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 registerServiceWorker();
 
 const RootComponent = () => (
-  <div>Traffic app</div>
+  <div>Traffic App</div>
 );
 
 ReactDOM.render(
