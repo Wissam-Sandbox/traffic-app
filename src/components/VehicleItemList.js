@@ -1,5 +1,6 @@
 import React from 'react';
 import VehicleItem from './VehicleItem';
+import '../styles/VehicleItemList.css';
 
 const data = [
   {
@@ -27,7 +28,7 @@ const data = [
 
 const VehicleItemList = () => {
   return (
-    <ul>
+    <ul className="vehicle-item-list">
       {
         data.map(item => (
           <li key={item.id}>
