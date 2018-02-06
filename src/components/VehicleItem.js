@@ -1,5 +1,5 @@
 import React from 'react';
-import './VehicleItem.css';
+import '../styles/VehicleItem.css';
 
 const VehicleItem = ({ imageUrl, type, brand, colors }) => {
   return (
