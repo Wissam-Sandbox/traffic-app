@@ -1,14 +1,14 @@
 import React from 'react';
 import FilterForm from './FilterForm';
-import VehicleItemList from './VehicleItemList';
+import VehicleItemListContainer from '../containers/VehicleItemListContainer';
 import Pagination from './Pagination';
 import 'normalize-css';
 
 const RootComponent = () => (
   <div>
-    <div>Traffic App</div>
+    <h1>Traffic App</h1>
     <FilterForm isDisabled={false} />
-    <VehicleItemList/>
+    <VehicleItemListContainer/>
     <Pagination/>
   </div>
 );

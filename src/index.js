@@ -1,18 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import trafficMeister from './service';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 import RootComponent from './components/RootComponent';
+import dataReducer from './reducers';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom'
 
 registerServiceWorker();
 
-ReactDOM.render(
-  <RootComponent/>,
-  document.getElementById('root')
+const store = createStore(
+  dataReducer,
+  applyMiddleware(
+    thunkMiddleware
+  )
 );
 
-// Previewing the included data service
-trafficMeister.fetchData(function(err, data) {
-  console.log(data);
-});
-
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path="/" render={() => (<RootComponent/>)} />
+      </Switch>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+);
