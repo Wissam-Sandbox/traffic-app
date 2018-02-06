@@ -94,7 +94,7 @@ var trafficMeister;
 
   function fetchData(cb) {
     if (!cb) {
-      throw 'Callback not defined';
+      throw new Error('Callback not defined');
     }
     setTimeout(function() {
       if (Math.floor(Math.random() * 20) === 2) {

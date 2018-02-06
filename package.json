@@ -1,6 +1,7 @@
 {
   "name": "traffic-app",
   "version": "0.1.0",
+  "author": "Wissam K.",
   "private": true,
   "dependencies": {
     "material-ui": "^1.0.0-beta.32",
