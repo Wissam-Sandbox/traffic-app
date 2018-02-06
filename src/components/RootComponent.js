@@ -4,7 +4,7 @@ import FilterForm from './FilterForm';
 const RootComponent = () => (
   <div>
     <div>Traffic App</div>
-    <FilterForm/>
+    <FilterForm isDisabled={false} />
   </div>
 );
 

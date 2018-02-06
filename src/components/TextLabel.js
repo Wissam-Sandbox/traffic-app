@@ -6,6 +6,9 @@ const translations = {
   },
   'filter.brand': {
     'en': 'Brand',
+  },
+  'filter.color': {
+    'en': 'Brand Color',
   }
 };
 

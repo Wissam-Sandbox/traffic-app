@@ -17,16 +17,25 @@ const fakeFilters = [
       { label: 'Mercedes', value: 'Mercedes' },
       { label: 'BMW', value: 'BMW' },
     ],
+  },
+  {
+    title: 'filter.color',
+    name: 'color',
+    options: [
+      { label: 'Red', value: 'red' },
+      { label: 'Yellow', value: 'yellow' },
+    ],
   }
 ];
 
-const FilterForm = ({ filters, filterValues }) => {
+const FilterForm = ({ filters, filterValues, isDisabled }) => {
   return (
     <div>
       {
         fakeFilters.map(filter => (
           <SelectDropdown
             key={filter.title}
+            isDisabled={isDisabled}
             title={filter.title}
             name={filter.name}
             options={filter.options}
