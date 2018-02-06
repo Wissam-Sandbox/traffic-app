@@ -1,0 +1,15 @@
+.vehicle-item {
+  display: flex;
+}
+
+.vehicle-item__img {
+  flex: 0 0 50%;
+}
+
+.vehicle-item__features {
+  flex: 0 0 50%;
+}
+
+.vehicle-item__img img {
+  width: 100%;
+}
