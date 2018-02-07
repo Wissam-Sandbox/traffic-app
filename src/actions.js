@@ -1,5 +1,14 @@
 import {requestData} from './service/dataService';
 
+const indexData = (data) => {
+  return data.reduce((matrix, item) => {
+    matrix.vehicles[item.id] = item;
+    return matrix;
+  }, {
+    vehicles: {},
+  });
+};
+
 const fetchInventory = () => {
   return dispatch => {
     dispatch({
@@ -8,32 +17,24 @@ const fetchInventory = () => {
     requestData()
       .then(
         data => {
-          const normalized = data.reduce((matrix, item) => {
-            const { id, type } = item;
-            matrix.vehicles[id] = item;
-
-            if (!matrix.types[type]) {
-              matrix.types[type] = [];
-            }
-            matrix.types[type].push(id);
-
-            return matrix;
-          }, {
-            vehicles: {},
-            types: {},
-          });
-
-          console.log(normalized);
-
           dispatch({
             type: 'FETCH_INVENTORY_SUCCESS',
-            data: normalized,
+            data: indexData(data),
           });
         }
       );
   };
 };
 
+const setFilters = (filterName, filterValues = []) => {
+  return {
+    type: 'SET_FILTERS',
+    filterName,
+    filterValues,
+  };
+};
+
 export {
   fetchInventory,
+  setFilters,
 }

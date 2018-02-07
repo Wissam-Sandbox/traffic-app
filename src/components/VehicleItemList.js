@@ -5,21 +5,25 @@ import '../styles/VehicleItemList.css';
 class VehicleItemList extends Component {
   render() {
     const { isFetchingData, data } = this.props;
+
     return (
-      isFetchingData ? <h1>Loading</h1> :
-      <ul className="vehicle-item-list">
-        {
-          Object.keys(data).map(id => (
-            <li key={id}>
-              <VehicleItem
-                imageUrl={data[id].img}
-                type={data[id].type}
-                brand={data[id].brand}
-                colors={data[id].colors} />
-            </li>
-          ))
-        }
-      </ul>
+      isFetchingData
+        ? <h1>Loading</h1>
+        : (
+          <ul className="vehicle-item-list">
+            {
+              data.map(item => (
+                <li key={item.id}>
+                  <VehicleItem
+                    imageUrl={item.img}
+                    type={item.type}
+                    brand={item.brand}
+                    colors={item.colors} />
+                </li>
+              ))
+            }
+          </ul>
+        )
     );
   }
 }
