@@ -3,10 +3,6 @@ import VehicleItem from './VehicleItem';
 import '../styles/VehicleItemList.css';
 
 class VehicleItemList extends Component {
-  componentDidMount() {
-    this.props.fetchData();
-  }
-
   render() {
     return (
       this.props.isFetchingData ? <h1>Loading</h1> :
