@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import VehicleItemList from '../components/VehicleItemList';
 import { fetchInventory } from '../actions';
-import { getFilteredVehicleIdsSelector } from '../selectors';
+import { getFilteredVehiclesSelector } from '../selectors';
 
 const mapStateToProps = (state) => {
   return {
     isFetchingData: state.inventory.isFetching,
-    data: getFilteredVehicleIdsSelector(state),
+    data: getFilteredVehiclesSelector(state),
   };
 };
 
