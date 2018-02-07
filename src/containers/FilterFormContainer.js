@@ -1,13 +1,17 @@
 import { connect } from 'react-redux';
 import FilterForm from '../components/FilterForm';
-import { activeFilterOptionsSelector, filterValuesSelector } from '../selectors';
+import {
+  isInventoryFetchSuccessfulSelector,
+  activeFilterOptionsSelector,
+  filterValuesSelector
+} from '../selectors';
 import { setFilters } from '../actions';
 
 const mapStateToProps = (state) => {
   const { isFetching, data } = state.inventory;
 
   return {
-    isDisabled: isFetching,
+    isDisabled: isFetching || !isInventoryFetchSuccessfulSelector(state),
     data: data.vehicles,
     filterOptions: activeFilterOptionsSelector(state),
     filterValues: filterValuesSelector(state),

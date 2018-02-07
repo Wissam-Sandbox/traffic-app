@@ -9,6 +9,16 @@ const indexData = (data) => {
   });
 };
 
+const fetchInventorySuccess = (data) => ({
+  type: 'FETCH_INVENTORY_SUCCESS',
+  data,
+});
+
+const fetchInventoryFailure = (error) => ({
+  type: 'FETCH_INVENTORY_FAILURE',
+  error,
+});
+
 const fetchInventory = () => {
   return dispatch => {
     dispatch({
@@ -17,10 +27,14 @@ const fetchInventory = () => {
     requestData()
       .then(
         data => {
-          dispatch({
-            type: 'FETCH_INVENTORY_SUCCESS',
-            data: indexData(data),
-          });
+          dispatch(
+            fetchInventorySuccess(indexData(data))
+          );
+        },
+        error => {
+          dispatch(
+            fetchInventoryFailure(error)
+          );
         }
       );
   };

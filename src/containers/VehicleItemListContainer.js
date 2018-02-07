@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import VehicleItemList from '../components/VehicleItemList';
 import { fetchInventory } from '../actions';
-import { getFilteredVehiclesSelector } from '../selectors';
+import {
+  isInventoryFetchSuccessfulSelector,
+  getFilteredVehiclesSelector
+} from '../selectors';
 
 const mapStateToProps = (state) => {
   return {
     isFetchingData: state.inventory.isFetching,
     data: getFilteredVehiclesSelector(state),
+    isFetchSuccessful: isInventoryFetchSuccessfulSelector(state),
   };
 };
 
@@ -26,9 +30,7 @@ class VehicleItemListWithDataOnLoad extends Component {
 
   render() {
     return (
-      <VehicleItemList
-        data={this.props.data}
-        isFetchingData={this.props.isFetchingData} />
+      <VehicleItemList {...this.props} />
     );
   }
 }

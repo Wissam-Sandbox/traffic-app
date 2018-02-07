@@ -6,6 +6,7 @@ const initialState = {
     brands: {},
     colors: {},
   },
+  errors: [],
   filters: {
     types: [],
     brands: [],
@@ -20,6 +21,7 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
         data: initialState.data,
+        errors: [],
       };
 
     case 'FETCH_INVENTORY_SUCCESS':
@@ -27,6 +29,15 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         data: action.data,
+        errors: [],
+      };
+
+    case 'FETCH_INVENTORY_FAILURE':
+      return {
+        ...state,
+        isFetching: false,
+        data: initialState.data,
+        errors: [action.errors],
       };
 
     case 'SET_FILTERS':

@@ -29,6 +29,10 @@ const reduceVehicles = (vehicles) => {
   });
 };
 
+const isInventoryFetchSuccessfulSelector = (state) => {
+  return !state.inventory.errors.length;
+};
+
 const vehiclesSelector = (state) => Object.values(state.inventory.data.vehicles);
 
 const filterMappedVehicleIdsSelector = (state) => {
@@ -47,14 +51,39 @@ const filterValuesSelector = (state) => {
 
 const indexedVehiclesSelector = (state) => state.inventory.data.vehicles;
 
-// @Todo: Review this logic and apply to all filter types
 const getFilteredVehicles = (indexedVehicles, filterMappedVehicleIds, filterValues) => {
-  const filteredIds = filterValues.colors.length ? filterValues.colors.reduce((accum, item) => {
+  const result = {
+    types: Object.keys(indexedVehicles).map(i => parseInt(i, 10)),
+    brands: Object.keys(indexedVehicles).map(i => parseInt(i, 10)),
+    colors: Object.keys(indexedVehicles).map(i => parseInt(i, 10)),
+  };
+
+  result.types = filterValues.types.length ? filterValues.types.reduce((accum, item) => {
     return accum.concat(
-      filterMappedVehicleIds['colors'][item]
+      filterMappedVehicleIds.types[item]
     );
-  }, []) : Object.keys(indexedVehicles);
-  return Array.from(new Set(filteredIds)).map(i => indexedVehicles[i]);
+  }, []) : result.types;
+
+  result.brands = filterValues.brands.length ? filterValues.brands.reduce((accum, item) => {
+    return accum.concat(
+      filterMappedVehicleIds.brands[item]
+    );
+  }, []) : result.brands;
+
+  result.colors = filterValues.colors.length ? filterValues.colors.reduce((accum, item) => {
+    return accum.concat(
+      filterMappedVehicleIds.colors[item]
+    );
+  }, []) : result.colors;
+
+  const interesection = Object.values(result)
+    .reduce((res, ids) => {
+      return res.filter(
+        x => ids.includes(x)
+      );
+    }, Object.values(result)[0]);
+
+  return interesection.map(i => indexedVehicles[i]);
 };
 
 const getFilteredVehiclesSelector = createSelector(
@@ -80,6 +109,7 @@ const activeFilterOptionsSelector = createSelector(
 );
 
 export {
+  isInventoryFetchSuccessfulSelector,
   vehiclesSelector,
   activeFilterOptionsSelector,
   filterValuesSelector,
