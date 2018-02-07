@@ -2,13 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
-import {configureStore} from './configureStore';
+import {history, configureStore} from './configureStore';
 import RootComponent from './components/RootComponent';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
+import {ConnectedRouter} from 'react-router-redux';
 
 registerServiceWorker();
 
@@ -16,11 +13,11 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <Switch>
         <Route path="/" component={RootComponent} />
       </Switch>
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

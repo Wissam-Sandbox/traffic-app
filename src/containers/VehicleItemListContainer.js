@@ -5,8 +5,8 @@ import {fetchVehicles} from '../actions';
 
 const mapStateToProps = (state) => {
   return {
-    isFetchingData: state.isFetchingVehicles,
-    data: state.vehicles,
+    isFetchingData: state.data.isFetchingVehicles,
+    data: state.data.vehicles,
   };
 };
 
