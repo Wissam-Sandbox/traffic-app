@@ -4,7 +4,7 @@ const vehiclesSelector = (state) => Object.values(state.inventory.data.vehicles)
 
 // const vehicleSelector = (state, vehicleId) => state.inventory.data.vehicles[vehicleId];
 
-const filteredVehiclesMapSelector = (state) => {
+const filterMappedVehicleIdsSelector = (state) => {
   return Object.values(state.inventory.data.vehicles).reduce((matrix, item) => {
     const { id, type, brand, colors } = item;
 
@@ -42,7 +42,7 @@ const filterOptionsSelector = (filteredVehiclesMap) => {
 };
 
 const activeFilterOptionsSelector = createSelector(
-  filteredVehiclesMapSelector,
+  filterMappedVehicleIdsSelector,
   filterOptionsSelector,
 );
 
@@ -54,8 +54,24 @@ const filterValuesSelector = (state) => {
   };
 };
 
+const getFilteredVehicleIds = (filterMappedVehicleIds, filterValues) => {
+  const filteredIds = filterValues.colors.reduce((accum, item) => {
+    return accum.concat(
+      filterMappedVehicleIds['colors'][item]
+    );
+  }, []);
+  console.log(filteredIds);
+};
+
+const getFilteredVehicleIdsSelector = createSelector(
+  filterMappedVehicleIdsSelector,
+  filterValuesSelector,
+  getFilteredVehicleIds,
+);
+
 export {
   vehiclesSelector,
   activeFilterOptionsSelector,
   filterValuesSelector,
+  getFilteredVehicleIdsSelector,
 }
