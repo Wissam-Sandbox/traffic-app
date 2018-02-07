@@ -1,12 +1,12 @@
 import React from 'react';
 import 'normalize-css';
-import FilterForm from './FilterForm';
 import VehicleItemListContainer from '../containers/VehicleItemListContainer';
+import FilterFormContainer from '../containers/FilterFormContainer';
 import Pagination from './Pagination';
 
 const RootComponent = () => (
   <div>
-    <FilterForm isDisabled={false} />
+    <FilterFormContainer/>
     <VehicleItemListContainer/>
     <Pagination/>
   </div>
