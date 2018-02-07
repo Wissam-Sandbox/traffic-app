@@ -1,26 +1,31 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import VehicleItemList from '../components/VehicleItemList';
-import {fetchVehicles} from '../actions';
+import {fetchInventory} from '../actions';
 
 const mapStateToProps = (state) => {
+  const {
+    isFetching,
+    data,
+  } = state.inventory;
+
   return {
-    isFetchingData: state.data.isFetchingVehicles,
-    data: state.data.vehicles,
+    isFetchingData: isFetching,
+    data: data.vehicles,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: () => {
-      dispatch(fetchVehicles());
+    fetchInventory: () => {
+      dispatch(fetchInventory());
     },
   };
 };
 
 class VehicleItemListWithDataOnLoad extends Component {
   componentDidMount() {
-    this.props.fetchData();
+    this.props.fetchInventory();
   }
 
   render() {

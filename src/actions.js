@@ -1,16 +1,33 @@
 import {requestData} from './service/dataService';
 
-const fetchVehicles = () => {
+const fetchInventory = () => {
   return dispatch => {
     dispatch({
-      type: 'REQUEST_VEHICLES',
+      type: 'FETCH_INVENTORY',
     });
     requestData()
       .then(
         data => {
+          const normalized = data.reduce((matrix, item) => {
+            const { id, type } = item;
+            matrix.vehicles[id] = item;
+
+            if (!matrix.types[type]) {
+              matrix.types[type] = [];
+            }
+            matrix.types[type].push(id);
+
+            return matrix;
+          }, {
+            vehicles: {},
+            types: {},
+          });
+
+          console.log(normalized);
+
           dispatch({
-            type: 'REQUEST_VEHICLES_SUCCESS',
-            data: data,
+            type: 'FETCH_INVENTORY_SUCCESS',
+            data: normalized,
           });
         }
       );
@@ -18,5 +35,5 @@ const fetchVehicles = () => {
 };
 
 export {
-  fetchVehicles,
+  fetchInventory,
 }

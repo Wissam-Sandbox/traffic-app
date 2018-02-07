@@ -1,22 +1,25 @@
 const initialState = {
-  isFetchingVehicles: false,
-  vehicles: [],
+  isFetching: false,
+  data: {
+    vehicles: {},
+    types: {},
+  },
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'REQUEST_VEHICLES':
+    case 'FETCH_INVENTORY':
       return {
         ...state,
-        vehicles: [],
-        isFetchingVehicles: true,
+        isFetching: true,
+        data: {}
       };
 
-    case 'REQUEST_VEHICLES_SUCCESS':
+    case 'FETCH_INVENTORY_SUCCESS':
       return {
         ...state,
-        vehicles: action.data,
-        isFetchingVehicles: false,
+        isFetching: false,
+        data: action.data,
       };
 
     default:
