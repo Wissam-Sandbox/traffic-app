@@ -9,7 +9,7 @@ const initialState = {
   filters: {
     types: [],
     brands: [],
-    colors: ['red'],
+    colors: [],
   }
 };
 
