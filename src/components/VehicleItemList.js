@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import VehicleItem from './VehicleItem';
+import LoadingScreen from './LoadingScreen';
 import '../styles/VehicleItemList.css';
 
 class VehicleItemList extends Component {
@@ -8,7 +9,7 @@ class VehicleItemList extends Component {
 
     return (
       isFetchingData
-        ? <h1>Loading</h1>
+        ? <LoadingScreen/>
         : (
           isFetchSuccessful
           ? (

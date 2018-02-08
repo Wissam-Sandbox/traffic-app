@@ -3,16 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './system/registerServiceWorker';
 import { history, configureStore } from './configureStore';
 import RootComponent from './components/RootComponent';
 
 registerServiceWorker();
 
-const store = configureStore();
-
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={configureStore()}>
     <ConnectedRouter history={history}>
       <Switch>
         <Route path="/" component={RootComponent} />
