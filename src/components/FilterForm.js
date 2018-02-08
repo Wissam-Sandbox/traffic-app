@@ -1,5 +1,6 @@
 import React from 'react';
 import SelectDropdown from './SelectDropdown';
+import '../styles/FilterForm.css';
 
 const fakeFilters = [
   {
@@ -36,7 +37,7 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, isDisabled }) => 
   };
 
   return (
-    <div>
+    <div className="filter-form">
       {
         theFilters.map(filter => (
           <SelectDropdown

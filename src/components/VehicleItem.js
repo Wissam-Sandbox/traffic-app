@@ -8,8 +8,8 @@ const VehicleItem = ({ imageUrl, type, brand, colors }) => {
         <img src={imageUrl} alt={brand} />
       </div>
       <div className="vehicle-item__features">
+        <div className="vehicle-item__brand">{brand}</div>
         <div>type: {type}</div>
-        <div>brand: {brand}</div>
         <div>
           {
             colors.map((color, index) => <span key={`color-${index}`}>{color}</span>)
