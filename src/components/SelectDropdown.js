@@ -4,17 +4,16 @@ import 'react-select/dist/react-select.css';
 import TextLabel from './TextLabel';
 import '../styles/SelectDropdown.css';
 
-const SelectDropdown = ({ title, name, options, value, onChange, isDisabled }) => {
+const SelectDropdown = ({ className, title, name, options, value, onChange, isDisabled }) => {
   return (
-    <div>
-      <TextLabel transKey={title} language="en" />
+    <div className={`select-dropdown ${className}`}>
+      <TextLabel transKey={title} />
       <Select
         disabled={isDisabled}
         multi={true}
         name={name}
         options={options}
         value={value}
-        className={'select-dropdown'}
         onChange={onChange} />
     </div>
   );

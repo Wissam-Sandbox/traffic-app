@@ -9,6 +9,9 @@ const translations = {
   },
   'filter.color': {
     'en': 'Brand Color',
+  },
+  'loading.error': {
+    'en': 'Error occurred while attempting your search :(',
   }
 };
 
@@ -18,9 +21,11 @@ const translate = (k, lang = 'en') => {
     : k;
 };
 
-const TextLabel = ({ transKey, language }) => {
+const TextLabel = ({ className, transKey, language }) => {
   return (
-    <div>{translate(transKey, language)}</div>
+    <div className={`text-label ${className}`}>
+      {translate(transKey, language)}
+    </div>
   );
 };
 

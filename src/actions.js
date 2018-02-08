@@ -1,4 +1,4 @@
-import {requestData} from './service/dataService';
+import {requestData} from './remote/dataService';
 
 const indexData = (data) => {
   return data.reduce((matrix, item) => {
