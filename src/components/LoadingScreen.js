@@ -4,7 +4,11 @@ import '../styles/LoadingScreen.css';
 const LoadingScreen = () => {
   return (
     <div className="loading-screen">
-      Loading
+      <div className="spinner">
+        <div className="bounce bounce1" />
+        <div className="bounce bounce2" />
+        <div className="bounce" />
+      </div>
     </div>
   );
 };
