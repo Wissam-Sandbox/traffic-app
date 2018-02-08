@@ -1,22 +1,51 @@
 const initialState = {
-  isFetchingVehicles: false,
-  vehicles: [],
+  isFetching: false,
+  data: {
+    vehicles: {},
+    types: {},
+    brands: {},
+    colors: {},
+  },
+  errors: [],
+  filters: {
+    types: [],
+    brands: [],
+    colors: [],
+  }
 };
 
-export default (state = initialState, action) => {
+export const inventoryReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'REQUEST_VEHICLES':
+    case 'FETCH_INVENTORY':
       return {
         ...state,
-        vehicles: [],
-        isFetchingVehicles: true,
+        isFetching: true,
+        data: initialState.data,
+        errors: [],
       };
 
-    case 'REQUEST_VEHICLES_SUCCESS':
+    case 'FETCH_INVENTORY_SUCCESS':
       return {
         ...state,
-        vehicles: action.data,
-        isFetchingVehicles: false,
+        isFetching: false,
+        data: action.data,
+        errors: [],
+      };
+
+    case 'FETCH_INVENTORY_FAILURE':
+      return {
+        ...state,
+        isFetching: false,
+        data: initialState.data,
+        errors: [action.errors],
+      };
+
+    case 'SET_FILTERS':
+      const filters = {...state.filters};
+      filters[action.filterName] = action.filterValues;
+      return {
+        ...state,
+        filters,
       };
 
     default:
