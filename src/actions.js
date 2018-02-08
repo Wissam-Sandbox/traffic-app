@@ -1,13 +1,8 @@
-import {requestData} from './remote/dataService';
-
-const indexData = (data) => {
-  return data.reduce((matrix, item) => {
-    matrix.vehicles[item.id] = item;
-    return matrix;
-  }, {
-    vehicles: {},
-  });
-};
+import queryString from 'query-string';
+import { push } from 'react-router-redux';
+import { requestData } from './remote/dataService';
+import { indexVehicles } from './utils';
+import { getFiltersFromUrlSelector } from './selectors';
 
 const fetchInventorySuccess = (data) => ({
   type: 'FETCH_INVENTORY_SUCCESS',
@@ -20,7 +15,7 @@ const fetchInventoryFailure = (error) => ({
 });
 
 const fetchInventory = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch({
       type: 'FETCH_INVENTORY',
     });
@@ -28,8 +23,14 @@ const fetchInventory = () => {
       .then(
         data => {
           dispatch(
-            fetchInventorySuccess(indexData(data))
+            fetchInventorySuccess(indexVehicles(data))
           );
+
+          // @todo: Does this belong here?!
+          const filters = getFiltersFromUrlSelector(getState());
+          Object.keys(filters).forEach(filterName => {
+            dispatch(setFilters(filterName, filters[filterName]));
+          });
         },
         error => {
           dispatch(
@@ -41,11 +42,17 @@ const fetchInventory = () => {
 };
 
 const setFilters = (filterName, filterValues = []) => {
-  return {
-    type: 'SET_FILTERS',
-    filterName,
-    filterValues,
-  };
+  return (dispatch, getState) => {
+    dispatch({
+      type: 'SET_FILTER',
+      filterName,
+      filterValues,
+    });
+
+    dispatch(
+      push(`search?${queryString.stringify(getState().inventory.filters, {arrayFormat: 'bracket'})}`)
+    );
+  }
 };
 
 export {
