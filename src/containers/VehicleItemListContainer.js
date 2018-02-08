@@ -5,13 +5,9 @@ import { fetchInventory } from '../actions';
 import {
   isInventoryFetchSuccessfulSelector,
   getFilteredVehiclesSelector,
-
-  getFiltersFromUrlSelector,
 } from '../selectors';
 
 const mapStateToProps = (state) => {
-  console.log(getFiltersFromUrlSelector(state));
-
   return {
     isFetchingData: state.inventory.isFetching,
     data: getFilteredVehiclesSelector(state),
