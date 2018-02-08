@@ -1,5 +1,18 @@
+@import "universal";
+
 .select-dropdown {
+  .text-label {
+    color: $grayDark;
+    margin-bottom: 5px;
+  }
+
   .Select-control {
     border-radius: 0;
+  }
+
+  .Select-value {
+    background-color: $blueNormal;
+    color: $white;
+    border: none;
   }
 }

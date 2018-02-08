@@ -42,6 +42,7 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, isDisabled }) => 
         theFilters.map(filter => (
           <SelectDropdown
             key={filter.title}
+            className={'filter-control'}
             isDisabled={isDisabled}
             title={filter.title}
             name={filter.name}
