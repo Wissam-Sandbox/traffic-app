@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import queryString from 'query-string';
 
 const reduceVehicles = (vehicles) => {
   return vehicles.reduce((matrix, item) => {
@@ -108,10 +109,17 @@ const activeFilterOptionsSelector = createSelector(
   filterOptionsSelector,
 );
 
+// @todo: move this
+const getFiltersFromUrlSelector = (state) => {
+  return queryString.parse(state.router.location.search, {arrayFormat: 'bracket'});
+};
+
 export {
   isInventoryFetchSuccessfulSelector,
   vehiclesSelector,
   activeFilterOptionsSelector,
   filterValuesSelector,
   getFilteredVehiclesSelector,
+
+  getFiltersFromUrlSelector,
 }

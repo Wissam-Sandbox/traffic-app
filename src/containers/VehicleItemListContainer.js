@@ -4,7 +4,7 @@ import VehicleItemList from '../components/VehicleItemList';
 import { fetchInventory } from '../actions';
 import {
   isInventoryFetchSuccessfulSelector,
-  getFilteredVehiclesSelector
+  getFilteredVehiclesSelector,
 } from '../selectors';
 
 const mapStateToProps = (state) => {

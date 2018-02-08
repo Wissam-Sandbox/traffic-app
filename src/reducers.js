@@ -40,7 +40,7 @@ export const inventoryReducer = (state = initialState, action) => {
         errors: [action.errors],
       };
 
-    case 'SET_FILTERS':
+    case 'SET_FILTER':
       const filters = {...state.filters};
       filters[action.filterName] = action.filterValues;
       return {
