@@ -55,7 +55,13 @@ const setFilters = (filterName, filterValues = []) => {
   }
 };
 
+const changePage = (page) => ({
+  type: 'CHANGE_PAGE',
+  page,
+});
+
 export {
   fetchInventory,
   setFilters,
+  changePage,
 }

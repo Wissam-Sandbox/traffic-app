@@ -2,6 +2,7 @@ import React from 'react';
 import 'normalize-css';
 import VehicleItemListContainer from '../containers/VehicleItemListContainer';
 import FilterFormContainer from '../containers/FilterFormContainer';
+import PaginationContainer from '../containers/PaginationContainer';
 import '../styles/Root.css';
 
 const RootComponent = () => (
@@ -10,6 +11,7 @@ const RootComponent = () => (
       <FilterFormContainer/>
     </div>
     <div className="wrap wrap-results">
+      <PaginationContainer/>
       <VehicleItemListContainer/>
     </div>
   </div>

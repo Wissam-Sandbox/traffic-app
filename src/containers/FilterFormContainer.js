@@ -3,7 +3,8 @@ import FilterForm from '../components/FilterForm';
 import {
   isInventoryFetchSuccessfulSelector,
   activeFilterOptionsSelector,
-  filterValuesSelector
+  filterValuesSelector,
+  getFilteredVehiclesSelector,
 } from '../selectors';
 import { setFilters } from '../actions';
 
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => {
   return {
     isDisabled: isFetching || !isInventoryFetchSuccessfulSelector(state),
     data: data.vehicles,
+    searchCount: getFilteredVehiclesSelector(state).length,
     filterOptions: activeFilterOptionsSelector(state),
     filterValues: filterValuesSelector(state),
   };

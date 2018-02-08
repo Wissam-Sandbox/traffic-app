@@ -6,6 +6,8 @@ const initialState = {
     brands: {},
     colors: {},
   },
+  pageSize: 5,
+  page: 0,
   errors: [],
   filters: {
     types: [],
@@ -21,6 +23,8 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
         data: initialState.data,
+        pageSize: initialState.pageSize,
+        page: initialState.page,
         errors: [],
       };
 
@@ -29,6 +33,8 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         data: action.data,
+        pageSize: initialState.pageSize,
+        page: initialState.page,
         errors: [],
       };
 
@@ -37,6 +43,8 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         data: initialState.data,
+        pageSize: initialState.pageSize,
+        page: initialState.page,
         errors: [action.errors],
       };
 
@@ -45,7 +53,15 @@ export const inventoryReducer = (state = initialState, action) => {
       filters[action.filterName] = action.filterValues;
       return {
         ...state,
+        pageSize: initialState.pageSize,
+        page: initialState.page,
         filters,
+      };
+
+    case 'CHANGE_PAGE':
+      return {
+        ...state,
+        page: action.page,
       };
 
     default:

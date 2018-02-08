@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import queryString from 'query-string';
+import { paginate, computePageCount } from './utils';
 
 const reduceVehicles = (vehicles) => {
   return vehicles.reduce((matrix, item) => {
@@ -52,6 +53,15 @@ const filterValuesSelector = (state) => {
 
 const indexedVehiclesSelector = (state) => state.inventory.data.vehicles;
 
+const getPaginationSelector = (state) => {
+  const { pageSize, page } = state.inventory;
+
+  return {
+    pageSize,
+    page,
+  };
+};
+
 const getFilteredVehicles = (indexedVehicles, filterMappedVehicleIds, filterValues) => {
   const result = {
     types: Object.keys(indexedVehicles).map(i => parseInt(i, 10)),
@@ -77,14 +87,14 @@ const getFilteredVehicles = (indexedVehicles, filterMappedVehicleIds, filterValu
     );
   }, []) : result.colors;
 
-  const interesection = Object.values(result)
+  const intersection = Object.values(result)
     .reduce((res, ids) => {
       return res.filter(
         x => ids.includes(x)
       );
     }, Object.values(result)[0]);
 
-  return interesection.map(i => indexedVehicles[i]);
+  return intersection.map(i => indexedVehicles[i]);
 };
 
 const getFilteredVehiclesSelector = createSelector(
@@ -92,6 +102,18 @@ const getFilteredVehiclesSelector = createSelector(
   filterMappedVehicleIdsSelector,
   filterValuesSelector,
   getFilteredVehicles,
+);
+
+const getFilteredVehiclesPaginatedSelector = createSelector(
+  getFilteredVehiclesSelector,
+  getPaginationSelector,
+  (filteredVehiclesArray, pagination) => {
+    return paginate(
+      filteredVehiclesArray,
+      pagination.pageSize,
+      pagination.page,
+    );
+  }
 );
 
 const filterOptionsSelector = (filteredVehiclesMap) => {
@@ -114,12 +136,23 @@ const getFiltersFromUrlSelector = (state) => {
   return queryString.parse(state.router.location.search, {arrayFormat: 'bracket'});
 };
 
+const getPageCountSelector = createSelector(
+  getFilteredVehiclesSelector,
+  getPaginationSelector,
+  (vehiclesArr, statePagination) => {
+    return computePageCount(vehiclesArr, statePagination.pageSize);
+  }
+);
+
 export {
   isInventoryFetchSuccessfulSelector,
   vehiclesSelector,
   activeFilterOptionsSelector,
   filterValuesSelector,
+  getPaginationSelector,
   getFilteredVehiclesSelector,
+  getFilteredVehiclesPaginatedSelector,
+  getPageCountSelector,
 
   getFiltersFromUrlSelector,
 }

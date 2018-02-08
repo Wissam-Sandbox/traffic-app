@@ -1,10 +1,17 @@
 @import "universal";
+@import "mixins";
 
 .filter-form {
   background-color: $white;
   padding: 20px;
   border-radius: 4px;
   border: 1px solid $grayBorder;
+}
+
+.filter-form__total {
+  @include font-bold();
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .filter-control {

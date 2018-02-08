@@ -2,12 +2,10 @@ import React from 'react';
 import VehicleItem from './VehicleItem';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
-import Pagination from './Pagination';
 import '../styles/VehicleItemList.css';
 
 const renderVehicleItems = (vehicles) => (
   <div>
-    <div className="vehicle-item-list__total">{`${vehicles.length} results`}</div>
     <ul className="vehicle-item-list">
       {
         vehicles.map(item => (
@@ -29,10 +27,7 @@ const VehicleItemList = ({ isFetchingData, data, isFetchSuccessful }) => {
     ? <LoadingScreen/>
     : (
       isFetchSuccessful
-        ? <div>
-            <Pagination/>
-            {renderVehicleItems(data)}
-          </div>
+        ? renderVehicleItems(data)
         : <ErrorScreen/>
     );
 };

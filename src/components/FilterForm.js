@@ -20,7 +20,7 @@ const fakeFilters = [
   }
 ];
 
-const FilterForm = ({ filterOptions, filterValues, setFilters, isDisabled }) => {
+const FilterForm = ({ filterOptions, filterValues, setFilters, searchCount, isDisabled }) => {
   const theFilters = fakeFilters.map(f => {
     return {
       title: f.title,
@@ -36,8 +36,15 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, isDisabled }) => 
     );
   };
 
+  const renderTotal = () => {
+    return !isDisabled
+      ? <div className="filter-form__total">{`${searchCount} results`}</div>
+      : null;
+  };
+
   return (
     <div className="filter-form">
+      {renderTotal()}
       {
         theFilters.map(filter => (
           <SelectDropdown
