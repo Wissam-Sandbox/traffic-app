@@ -1,3 +1,5 @@
+@import "mixins";
+
 .vehicle-item-list {
   list-style-type: none;
   padding: 0;
@@ -5,4 +7,9 @@
     display: flex;
     list-style: none;
   }
+}
+
+.vehicle-item-list__total {
+  @include font-bold();
+  font-size: 18px;
 }

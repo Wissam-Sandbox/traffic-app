@@ -9,6 +9,9 @@ const translations = {
   },
   'filter.color': {
     'en': 'Brand Color',
+  },
+  'loading.error': {
+    'en': 'Error occurred while attempting your search :(',
   }
 };
 

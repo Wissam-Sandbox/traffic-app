@@ -3,13 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300');
 
 @import "universal";
+@import "mixins";
 
 body {
   background-color: $gray;
 }
 
 .app-root {
-  font-family: 'Source Sans Pro', sans-serif;
+  @include font-regular();
   display: flex;
   box-sizing: border-box;
   width: 100%;

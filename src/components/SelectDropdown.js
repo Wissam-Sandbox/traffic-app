@@ -7,7 +7,7 @@ import '../styles/SelectDropdown.css';
 const SelectDropdown = ({ className, title, name, options, value, onChange, isDisabled }) => {
   return (
     <div className={`select-dropdown ${className}`}>
-      <TextLabel transKey={title} language="en" />
+      <TextLabel transKey={title} />
       <Select
         disabled={isDisabled}
         multi={true}
