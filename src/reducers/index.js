@@ -1,3 +1,5 @@
+import ACTION_TYPES from '../actions/types';
+
 const initialState = {
   isFetching: false,
   data: {
@@ -18,7 +20,7 @@ const initialState = {
 
 export const inventoryReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCH_INVENTORY':
+    case ACTION_TYPES.FETCH_INVENTORY:
       return {
         ...state,
         isFetching: true,
@@ -28,7 +30,7 @@ export const inventoryReducer = (state = initialState, action) => {
         errors: [],
       };
 
-    case 'FETCH_INVENTORY_SUCCESS':
+    case ACTION_TYPES.FETCH_INVENTORY_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -38,7 +40,7 @@ export const inventoryReducer = (state = initialState, action) => {
         errors: [],
       };
 
-    case 'FETCH_INVENTORY_FAILURE':
+    case ACTION_TYPES.FETCH_INVENTORY_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -48,7 +50,7 @@ export const inventoryReducer = (state = initialState, action) => {
         errors: [action.errors],
       };
 
-    case 'SET_FILTER':
+    case ACTION_TYPES.SET_FILTER:
       const filters = {...state.filters};
       filters[action.filterName] = action.filterValues;
       return {
@@ -58,7 +60,7 @@ export const inventoryReducer = (state = initialState, action) => {
         filters,
       };
 
-    case 'CHANGE_PAGE':
+    case ACTION_TYPES.CHANGE_PAGE:
       return {
         ...state,
         page: action.page,
