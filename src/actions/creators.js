@@ -24,28 +24,20 @@ const fetchInventory = () => {
       .then(
         data => {
           dispatch(fetchInventorySuccess(indexVehicles(data)));
-
-          // @todo: Does this belong here?!
-          const filters = getFiltersFromUrlSelector(getState());
-          Object.keys(filters).forEach(filterName => {
-            dispatch(setFilters(filterName, filters[filterName]));
-          });
+          dispatch(setFilters(getFiltersFromUrlSelector(getState())));
         },
         error => {
-          dispatch(
-            fetchInventoryFailure(error)
-          );
+          dispatch(fetchInventoryFailure(error));
         }
       );
   };
 };
 
-const setFilters = (filterName, filterValues = []) => {
+const setFilters = (filters) => {
   return (dispatch, getState) => {
     dispatch({
       type: ACTION_TYPES.SET_FILTER,
-      filterName,
-      filterValues,
+      filters,
     });
 
     dispatch(

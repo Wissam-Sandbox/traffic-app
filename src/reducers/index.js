@@ -51,14 +51,12 @@ export const inventoryReducer = (state = initialState, action) => {
       };
 
     case ACTION_TYPES.SET_FILTER:
-      const filters = {...state.filters};
-      filters[action.filterName] = action.filterValues;
       return {
         ...state,
         pageSize: initialState.pageSize,
         page: initialState.page,
         errors: initialState.errors,
-        filters,
+        filters: action.filters,
       };
 
     case ACTION_TYPES.CHANGE_PAGE:
