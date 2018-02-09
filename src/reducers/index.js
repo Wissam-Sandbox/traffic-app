@@ -27,7 +27,7 @@ export const inventoryReducer = (state = initialState, action) => {
         data: initialState.data,
         pageSize: initialState.pageSize,
         page: initialState.page,
-        errors: [],
+        errors: initialState.errors,
       };
 
     case ACTION_TYPES.FETCH_INVENTORY_SUCCESS:
@@ -35,9 +35,9 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         data: action.data,
+        errors: initialState.errors,
         pageSize: initialState.pageSize,
         page: initialState.page,
-        errors: [],
       };
 
     case ACTION_TYPES.FETCH_INVENTORY_FAILURE:
@@ -45,9 +45,9 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         data: initialState.data,
+        errors: [action.errors],
         pageSize: initialState.pageSize,
         page: initialState.page,
-        errors: [action.errors],
       };
 
     case ACTION_TYPES.SET_FILTER:
@@ -57,12 +57,14 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         pageSize: initialState.pageSize,
         page: initialState.page,
+        errors: initialState.errors,
         filters,
       };
 
     case ACTION_TYPES.CHANGE_PAGE:
       return {
         ...state,
+        errors: initialState.errors,
         page: action.page,
       };
 
