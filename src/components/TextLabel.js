@@ -1,25 +1,5 @@
 import React from 'react';
-
-const translations = {
-  'filter.type': {
-    'en': 'Type',
-  },
-  'filter.brand': {
-    'en': 'Brand',
-  },
-  'filter.color': {
-    'en': 'Brand Color',
-  },
-  'loading.error': {
-    'en': 'Error occurred while attempting your search :(',
-  }
-};
-
-const translate = (k, lang = 'en') => {
-  return translations[k]
-    ? (translations[k][lang])
-    : k;
-};
+import {translate} from '../i18n/tools';
 
 const TextLabel = ({ className, transKey, language }) => {
   return (

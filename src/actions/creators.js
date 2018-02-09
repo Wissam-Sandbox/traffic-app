@@ -1,30 +1,29 @@
 import queryString from 'query-string';
 import { push } from 'react-router-redux';
-import { requestData } from './remote/dataService';
-import { indexVehicles } from './utils';
-import { getFiltersFromUrlSelector } from './selectors';
+import ACTION_TYPES from './types';
+import { requestData } from '../remote/dataService';
+import { indexVehicles } from '../utils';
+import { getFiltersFromUrlSelector } from '../selectors/routing';
 
 const fetchInventorySuccess = (data) => ({
-  type: 'FETCH_INVENTORY_SUCCESS',
+  type: ACTION_TYPES.FETCH_INVENTORY_SUCCESS,
   data,
 });
 
 const fetchInventoryFailure = (error) => ({
-  type: 'FETCH_INVENTORY_FAILURE',
+  type: ACTION_TYPES.FETCH_INVENTORY_FAILURE,
   error,
 });
 
 const fetchInventory = () => {
   return (dispatch, getState) => {
     dispatch({
-      type: 'FETCH_INVENTORY',
+      type: ACTION_TYPES.FETCH_INVENTORY,
     });
     requestData()
       .then(
         data => {
-          dispatch(
-            fetchInventorySuccess(indexVehicles(data))
-          );
+          dispatch(fetchInventorySuccess(indexVehicles(data)));
 
           // @todo: Does this belong here?!
           const filters = getFiltersFromUrlSelector(getState());
@@ -44,7 +43,7 @@ const fetchInventory = () => {
 const setFilters = (filterName, filterValues = []) => {
   return (dispatch, getState) => {
     dispatch({
-      type: 'SET_FILTER',
+      type: ACTION_TYPES.SET_FILTER,
       filterName,
       filterValues,
     });
@@ -56,7 +55,7 @@ const setFilters = (filterName, filterValues = []) => {
 };
 
 const changePage = (page) => ({
-  type: 'CHANGE_PAGE',
+  type: ACTION_TYPES.CHANGE_PAGE,
   page,
 });
 

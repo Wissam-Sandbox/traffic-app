@@ -5,15 +5,12 @@ import {
   activeFilterOptionsSelector,
   filterValuesSelector,
   getFilteredVehiclesSelector,
-} from '../selectors';
-import { setFilters } from '../actions';
+} from '../selectors/inventory';
+import { setFilters } from '../actions/creators';
 
 const mapStateToProps = (state) => {
-  const { isFetching, data } = state.inventory;
-
   return {
-    isDisabled: isFetching || !isInventoryFetchSuccessfulSelector(state),
-    data: data.vehicles,
+    isDisabled: state.inventory.isFetching || !isInventoryFetchSuccessfulSelector(state),
     searchCount: getFilteredVehiclesSelector(state).length,
     filterOptions: activeFilterOptionsSelector(state),
     filterValues: filterValuesSelector(state),

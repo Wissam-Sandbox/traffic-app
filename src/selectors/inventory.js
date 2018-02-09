@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
-import queryString from 'query-string';
-import { paginate, computePageCount } from './utils';
+import { paginate, computePageCount, intersectAll } from '../utils';
 
 const reduceVehicles = (vehicles) => {
   return vehicles.reduce((matrix, item) => {
@@ -35,7 +34,9 @@ const isInventoryFetchSuccessfulSelector = (state) => {
   return !state.inventory.errors.length;
 };
 
+const indexedVehiclesSelector = (state) => state.inventory.data.vehicles;
 const vehiclesSelector = (state) => Object.values(state.inventory.data.vehicles);
+const vehicleIDsSelector = (state) => Object.keys(indexedVehiclesSelector(state)).map(i => parseInt(i, 10));
 
 const filterMappedVehicleIdsSelector = (state) => {
   return reduceVehicles(
@@ -51,8 +52,6 @@ const filterValuesSelector = (state) => {
   };
 };
 
-const indexedVehiclesSelector = (state) => state.inventory.data.vehicles;
-
 const getPaginationSelector = (state) => {
   const { pageSize, page } = state.inventory;
 
@@ -62,43 +61,35 @@ const getPaginationSelector = (state) => {
   };
 };
 
-const getFilteredVehicles = (indexedVehicles, filterMappedVehicleIds, filterValues) => {
-  const result = {
-    types: Object.keys(indexedVehicles).map(i => parseInt(i, 10)),
-    brands: Object.keys(indexedVehicles).map(i => parseInt(i, 10)),
-    colors: Object.keys(indexedVehicles).map(i => parseInt(i, 10)),
-  };
+const getFilteredVehicles = (indexedVehicles, vehiclesIds, filterMappedVehicleIds, filterValues) => {
+  const result = {};
 
   result.types = filterValues.types.length ? filterValues.types.reduce((accum, item) => {
     return accum.concat(
       filterMappedVehicleIds.types[item]
     );
-  }, []) : result.types;
+  }, []) : vehiclesIds;
 
   result.brands = filterValues.brands.length ? filterValues.brands.reduce((accum, item) => {
     return accum.concat(
       filterMappedVehicleIds.brands[item]
     );
-  }, []) : result.brands;
+  }, []) : vehiclesIds;
 
   result.colors = filterValues.colors.length ? filterValues.colors.reduce((accum, item) => {
     return accum.concat(
       filterMappedVehicleIds.colors[item]
     );
-  }, []) : result.colors;
+  }, []) : vehiclesIds;
 
-  const intersection = Object.values(result)
-    .reduce((res, ids) => {
-      return res.filter(
-        x => ids.includes(x)
-      );
-    }, Object.values(result)[0]);
+  const intersection = intersectAll(Object.values(result));
 
   return intersection.map(i => indexedVehicles[i]);
 };
 
 const getFilteredVehiclesSelector = createSelector(
   indexedVehiclesSelector,
+  vehicleIDsSelector,
   filterMappedVehicleIdsSelector,
   filterValuesSelector,
   getFilteredVehicles,
@@ -131,11 +122,6 @@ const activeFilterOptionsSelector = createSelector(
   filterOptionsSelector,
 );
 
-// @todo: move this
-const getFiltersFromUrlSelector = (state) => {
-  return queryString.parse(state.router.location.search, {arrayFormat: 'bracket'});
-};
-
 const getPageCountSelector = createSelector(
   getFilteredVehiclesSelector,
   getPaginationSelector,
@@ -153,6 +139,4 @@ export {
   getFilteredVehiclesSelector,
   getFilteredVehiclesPaginatedSelector,
   getPageCountSelector,
-
-  getFiltersFromUrlSelector,
 }

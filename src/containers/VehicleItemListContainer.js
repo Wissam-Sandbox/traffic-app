@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import VehicleItemList from '../components/VehicleItemList';
-import { fetchInventory } from '../actions';
+import { fetchInventory } from '../actions/creators';
 import {
   isInventoryFetchSuccessfulSelector,
   getFilteredVehiclesPaginatedSelector,
-} from '../selectors';
+} from '../selectors/inventory';
 
 const mapStateToProps = (state) => {
   return {

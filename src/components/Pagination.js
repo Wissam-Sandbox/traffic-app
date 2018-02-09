@@ -8,10 +8,10 @@ const Pagination = ({ pageCount, changePage }) => {
   };
 
   return (
-    pageCount ?
+    !!pageCount &&
     <ReactPaginate
-      previousLabel={"previous"}
-      nextLabel={"next"}
+      previousLabel={'previous'}
+      nextLabel={'next'}
       breakLabel={<span>...</span>}
       breakClassName={'break-class-name'}
       pageCount={pageCount}
@@ -21,7 +21,6 @@ const Pagination = ({ pageCount, changePage }) => {
       containerClassName={'pagination'}
       subContainerClassName={'pages pagination'}
       activeClassName={'active'} />
-    : null
   );
 };
 
