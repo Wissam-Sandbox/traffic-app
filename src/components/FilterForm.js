@@ -32,7 +32,7 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, searchCount, isDi
   const handleChangeFilter = (name, values) => {
     const updatedFilters = {...filterValues};
     updatedFilters[name] = values.map(v => v.value);
-    console.log('updated filters: ', updatedFilters);
+
     setFilters(updatedFilters);
   };
 
