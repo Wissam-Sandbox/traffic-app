@@ -1,0 +1,20 @@
+@import "universal";
+
+.color-chip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  background-color: $grayDark;
+  padding: 5px;
+}
+
+.color-chip__shape {
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  background-color: $gray;
+}
