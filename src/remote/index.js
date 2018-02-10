@@ -1,4 +1,4 @@
-import trafficMeister from './service';
+import trafficMeister from './apiLocal';
 
 const requestData = () => {
   return new Promise((resolve, reject) => {

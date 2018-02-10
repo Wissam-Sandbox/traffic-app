@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 import { push } from 'react-router-redux';
 import ACTION_TYPES from './types';
-import { requestData } from '../remote/dataService';
+import { requestData } from '../remote';
 import { indexVehicles } from '../utils';
 import { getFiltersFromUrlSelector } from '../selectors/routing';
 
