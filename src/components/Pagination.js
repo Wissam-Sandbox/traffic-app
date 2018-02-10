@@ -2,7 +2,7 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import '../styles/Pagination.css';
 
-const Pagination = ({ pageCount, changePage }) => {
+const Pagination = ({ pageCount, page, changePage }) => {
   const handlePageChange = (pageObject) => {
     changePage(pageObject.selected);
   };
@@ -15,6 +15,7 @@ const Pagination = ({ pageCount, changePage }) => {
       breakLabel={<span>...</span>}
       breakClassName={'break-class-name'}
       pageCount={pageCount}
+      forcePage={page}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={handlePageChange}

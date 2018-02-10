@@ -4,11 +4,10 @@ import { getPaginationSelector, getPageCountSelector } from '../selectors/invent
 import { changePage } from '../actions/creators';
 
 const mapStateToProps = (state) => {
-  const { pageSize, page } = getPaginationSelector(state);
+  const { page } = getPaginationSelector(state);
 
   return {
     page,
-    pageSize,
     pageCount: getPageCountSelector(state),
   }
 };
