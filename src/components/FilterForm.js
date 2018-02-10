@@ -2,32 +2,7 @@ import React from 'react';
 import SelectDropdown from './SelectDropdown';
 import '../styles/FilterForm.css';
 
-const fakeFilters = [
-  {
-    title: 'filter.type',
-    name: 'types',
-    options: [],
-  },
-  {
-    title: 'filter.brand',
-    name: 'brands',
-    options: [],
-  },
-  {
-    title: 'filter.color',
-    name: 'colors',
-    options: [],
-  }
-];
-
 const FilterForm = ({ filterOptions, filterValues, setFilters, searchCount, isDisabled }) => {
-  const theFilters = fakeFilters.map(f => {
-    return {
-      title: f.title,
-      name: f.name,
-      options: filterOptions[f.name] || []
-    };
-  });
 
   const handleChangeFilter = (name, values) => {
     const updatedFilters = {...filterValues};
@@ -46,12 +21,12 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, searchCount, isDi
     <div className="filter-form">
       {renderTotal()}
       {
-        theFilters.map(filter => (
+        filterOptions.map(filter => (
           <SelectDropdown
-            key={filter.title}
+            key={filter.name}
             className={'filter-control'}
             isDisabled={isDisabled}
-            title={filter.title}
+            title={`filter.${filter.name}`}
             name={filter.name}
             options={filter.options}
             value={filterValues[filter.name]}

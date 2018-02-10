@@ -1,12 +1,12 @@
 const TRANSLATIONS = {
-  'filter.type': {
+  'filter.types': {
     'en': 'Type',
   },
-  'filter.brand': {
+  'filter.brands': {
     'en': 'Brand',
   },
-  'filter.color': {
-    'en': 'Brand Color',
+  'filter.colors': {
+    'en': 'Color',
   },
   'loading.error': {
     'en': 'Error occurred while attempting your search :(',

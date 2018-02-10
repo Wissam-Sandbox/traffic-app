@@ -1,20 +1,25 @@
 @import "universal";
+@import "mixins";
 
 .color-chip {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 10px;
-  background-color: $grayDark;
-  padding: 5px;
+}
+
+.color-chip__text {
+  font-size: 14px;
+  color: $grayDark;
 }
 
 .color-chip__shape {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  border: 1px solid $grayDark;
+  width: 18px;
+  height: 18px;
   margin-right: 5px;
   background-color: $gray;
 }

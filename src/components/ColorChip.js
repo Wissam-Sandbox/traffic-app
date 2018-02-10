@@ -2,11 +2,14 @@ import React from 'react';
 import '../styles/ColorChip.css';
 
 const COLOR_CODES = {
-  red: '#FF0000',
-  green: '#008000',
-  blue: '#0000FF',
-  yellow: '#FFFF00',
+  black: '#000000',
+  white: '#ffffff',
+  red: '#F44336',
+  green: '#4CAF50',
+  blue: '#2196F3',
+  yellow: '#FFEB3B',
   purple: '#800080',
+  grey: '#757575',
   default: '#F1F1F1',
 };
 

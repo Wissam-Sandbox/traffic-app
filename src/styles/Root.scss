@@ -11,6 +11,7 @@ body {
 
 .app-root {
   @include font-regular();
+  font-size: 14px;;
   display: flex;
   box-sizing: border-box;
   width: 100%;
