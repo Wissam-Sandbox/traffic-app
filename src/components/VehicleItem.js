@@ -1,4 +1,5 @@
 import React from 'react';
+import ColorChip from './ColorChip';
 import '../styles/VehicleItem.css';
 
 const VehicleItem = ({ imageUrl, type, brand, colors }) => {
@@ -10,9 +11,9 @@ const VehicleItem = ({ imageUrl, type, brand, colors }) => {
       <div className="vehicle-item__features">
         <div className="vehicle-item__brand mb-10">{brand}</div>
         <div className="mb-10">{type}</div>
-        <div>
+        <div style={{ display: 'flex' }}>
           {
-            colors.map((color, index) => <span key={`color-${index}`}>{color}</span>)
+            colors.map((color, index) => <ColorChip key={`color-${index}`} colorName={color} />)
           }
         </div>
       </div>

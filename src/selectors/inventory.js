@@ -30,59 +30,30 @@ const reduceVehicles = (vehicles) => {
   });
 };
 
-const isInventoryFetchSuccessfulSelector = (state) => {
-  return !state.inventory.errors.length;
-};
+const isInventoryFetchSuccessfulSelector = (state) => !state.inventory.errors.length;
 
 const indexedVehiclesSelector = (state) => state.inventory.data.vehicles;
+
 const vehiclesSelector = (state) => Object.values(state.inventory.data.vehicles);
+
 const vehicleIDsSelector = (state) => Object.keys(indexedVehiclesSelector(state)).map(i => parseInt(i, 10));
 
-const filterMappedVehicleIdsSelector = (state) => {
-  return reduceVehicles(
-    vehiclesSelector(state)
-  );
-};
+const filterMappedVehicleIdsSelector = (state) => reduceVehicles(vehiclesSelector(state));
 
-const filterValuesSelector = (state) => {
-  return {
-    types: state.inventory.filters['types'],
-    brands: state.inventory.filters['brands'],
-    colors: state.inventory.filters['colors'],
-  };
-};
+const filterValuesSelector = (state) => state.inventory.filters;
 
 const getPaginationSelector = (state) => {
   const { pageSize, page } = state.inventory;
 
-  return {
-    pageSize,
-    page,
-  };
+  return { pageSize, page };
 };
 
-const getFilteredVehicles = (indexedVehicles, vehiclesIds, filterMappedVehicleIds, filterValues) => {
-  const result = {};
-
-  result.types = filterValues.types.length ? filterValues.types.reduce((accum, item) => {
-    return accum.concat(
-      filterMappedVehicleIds.types[item]
-    );
-  }, []) : vehiclesIds;
-
-  result.brands = filterValues.brands.length ? filterValues.brands.reduce((accum, item) => {
-    return accum.concat(
-      filterMappedVehicleIds.brands[item]
-    );
-  }, []) : vehiclesIds;
-
-  result.colors = filterValues.colors.length ? filterValues.colors.reduce((accum, item) => {
-    return accum.concat(
-      filterMappedVehicleIds.colors[item]
-    );
-  }, []) : vehiclesIds;
-
-  const intersection = intersectAll(Object.values(result));
+const getFilteredVehicles = (indexedVehicles, vehiclesIds, vehicleIdsIndexedByFilter, filterValues) => {
+  const intersection = intersectAll([
+    intersectAll([...filterValues['types'].map(item => vehicleIdsIndexedByFilter['types'][item]), vehiclesIds]),
+    intersectAll([...filterValues['brands'].map(item => vehicleIdsIndexedByFilter['brands'][item]), vehiclesIds]),
+    intersectAll([...filterValues['colors'].map(item => vehicleIdsIndexedByFilter['colors'][item]), vehiclesIds]),
+  ]);
 
   return intersection.map(i => indexedVehicles[i]);
 };
@@ -108,17 +79,17 @@ const getFilteredVehiclesPaginatedSelector = createSelector(
 );
 
 const filterOptionsSelector = (filteredVehiclesMap) => {
-  return {
-    types: Object.keys(filteredVehiclesMap.types).map(i => ({ value: i, label: i })),
-    brands: Object.keys(filteredVehiclesMap.brands).map(i => ({ value: i, label: i })),
-    colors: Object.keys(filteredVehiclesMap.colors).map(i => ({ value: i, label: i })),
-  };
+  return Object.keys(filteredVehiclesMap)
+    .map(filterName => {
+      return {
+        name: filterName,
+        options: Object.keys(filteredVehiclesMap[filterName]).map(i => ({ value: i, label: i }))
+      }
+    });
 };
 
 const activeFilterOptionsSelector = createSelector(
-  (state) => {
-    return reduceVehicles(getFilteredVehiclesSelector(state));
-  },
+  state => reduceVehicles(getFilteredVehiclesSelector(state)),
   filterOptionsSelector,
 );
 
