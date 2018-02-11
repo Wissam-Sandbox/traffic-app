@@ -13,6 +13,7 @@ const renderVehicleItems = (vehicles) => (
         vehicles.map(item => (
           <li key={item.id}>
             <VehicleItem
+              vehicleId={item.id}
               imageUrl={item.img}
               type={item.type}
               brand={item.brand}
