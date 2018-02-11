@@ -25,7 +25,7 @@ describe('VehicleItemList', () => {
   });
 
   describe('Data fetch success', () => {
-    it('should correctly render list of VehicleItem', () => {
+    it('should correctly render list of VehicleItems', () => {
       const renderedComponent = shallow(
         <VehicleItemList
           isFetchingData={false}
