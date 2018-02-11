@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import registerServiceWorker from './system/registerServiceWorker';
 import { history, configureStore } from './configureStore';
-import RootComponent from './components/RootComponent';
+import App from './components/App';
 
 registerServiceWorker();
 
@@ -13,7 +13,7 @@ ReactDOM.render(
   <Provider store={configureStore()}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/" component={RootComponent} />
+        <Route path="/" component={App} />
       </Switch>
     </ConnectedRouter>
   </Provider>,

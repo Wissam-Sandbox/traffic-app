@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import VehicleItem from './VehicleItem';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
@@ -30,6 +31,12 @@ const VehicleItemList = ({ isFetchingData, data, isFetchSuccessful }) => {
         ? renderVehicleItems(data)
         : <ErrorScreen/>
     );
+};
+
+VehicleItemList.propTypes = {
+  isFetchingData: PropTypes.bool,
+  data: PropTypes.array,
+  isFetchSuccessful: PropTypes.bool,
 };
 
 export default VehicleItemList;

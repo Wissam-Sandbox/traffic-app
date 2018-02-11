@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/ColorChip.css';
 
 const COLOR_CODES = {
@@ -20,6 +21,10 @@ const ColorChip = ({ colorName }) => {
       <span className="color-chip__text">{colorName}</span>
     </div>
   );
+};
+
+ColorChip.prototypes = {
+  className: PropTypes.string,
 };
 
 export default ColorChip;

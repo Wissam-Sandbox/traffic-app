@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SelectDropdown from './SelectDropdown';
 import '../styles/FilterForm.css';
 
@@ -35,6 +36,14 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, searchCount, isDi
       }
     </div>
   );
+};
+
+FilterForm.propTypes = {
+  filterOptions: PropTypes.array,
+  filterValues: PropTypes.object,
+  setFilters: PropTypes.func,
+  searchCount: PropTypes.number,
+  isDisabled: PropTypes.bool,
 };
 
 export default FilterForm;

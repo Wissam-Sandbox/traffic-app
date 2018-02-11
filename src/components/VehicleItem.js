@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ColorChip from './ColorChip';
 import '../styles/VehicleItem.css';
 
@@ -19,6 +20,13 @@ const VehicleItem = ({ imageUrl, type, brand, colors }) => {
       </div>
     </div>
   );
+};
+
+VehicleItem.propTypes = {
+  imageUrl: PropTypes.string,
+  type: PropTypes.string,
+  brand: PropTypes.string,
+  colors: PropTypes.array,
 };
 
 export default VehicleItem;

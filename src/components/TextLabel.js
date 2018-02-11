@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {translate} from '../i18n/tools';
 
 const TextLabel = ({ className, transKey, language }) => {
@@ -7,6 +8,12 @@ const TextLabel = ({ className, transKey, language }) => {
       {translate(transKey, language)}
     </div>
   );
+};
+
+TextLabel.propTypes = {
+  className: PropTypes.string,
+  transKey: PropTypes.string,
+  language: PropTypes.string,
 };
 
 export default TextLabel;

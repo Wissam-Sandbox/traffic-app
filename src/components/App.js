@@ -5,7 +5,7 @@ import FilterFormContainer from '../containers/FilterFormContainer';
 import PaginationContainer from '../containers/PaginationContainer';
 import '../styles/Root.css';
 
-const RootComponent = () => (
+const App = () => (
   <div className="app-root">
     <div className='wrap wrap-filters'>
       <FilterFormContainer/>
@@ -17,4 +17,4 @@ const RootComponent = () => (
   </div>
 );
 
-export default RootComponent;
+export default App;
