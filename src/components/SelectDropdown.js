@@ -5,7 +5,7 @@ import 'react-select/dist/react-select.css';
 import TextLabel from './TextLabel';
 import '../styles/SelectDropdown.css';
 
-const SelectDropdown = ({ className, title, name, options, value, onChange, isDisabled }) => {
+const SelectDropdown = ({ isDisabled, className, title, name, options, value, onChange }) => {
   return (
     <div className={`select-dropdown ${className}`}>
       <TextLabel transKey={title} />
@@ -21,13 +21,20 @@ const SelectDropdown = ({ className, title, name, options, value, onChange, isDi
 };
 
 SelectDropdown.propTypes = {
+  isDisabled: PropTypes.bool,
   className: PropTypes.string,
   title: PropTypes.string,
   name: PropTypes.string,
   options: PropTypes.array,
   value: PropTypes.array,
   onChange: PropTypes.func,
-  isDisabled: PropTypes.bool,
+};
+
+SelectDropdown.defaultProps = {
+  isDisabled: false,
+  className: '',
+  value: [],
+  onChange: x => x,
 };
 
 export default SelectDropdown;

@@ -17,4 +17,16 @@ describe('LoadingScreen', () => {
   it('should have the correct className', () => {
     expect(renderedComponent.hasClass('loading-screen')).toBe(true);
   });
+
+  it('should contain the animated element', () => {
+    expect(
+      renderedComponent.containsMatchingElement(
+        <div className="spinner">
+          <div className="bounce bounce1" />
+          <div className="bounce bounce2" />
+          <div className="bounce" />
+        </div>
+      )
+    ).toBe(true);
+  });
 });

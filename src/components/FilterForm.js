@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SelectDropdown from './SelectDropdown';
 import '../styles/FilterForm.css';
 
-const FilterForm = ({ filterOptions, filterValues, setFilters, searchCount, isDisabled }) => {
+const FilterForm = ({ filterOptions, filterValues, setFilters, isDisabled }) => {
 
   const handleChangeFilter = (name, values) => {
     const updatedFilters = {...filterValues};
@@ -12,15 +12,8 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, searchCount, isDi
     setFilters(updatedFilters);
   };
 
-  const renderTotal = () => {
-    return !isDisabled
-      ? <div className="filter-form__total">{`${searchCount} results`}</div>
-      : null;
-  };
-
   return (
     <div className="filter-form">
-      {renderTotal()}
       {
         filterOptions.map(filter => (
           <SelectDropdown
@@ -42,8 +35,12 @@ FilterForm.propTypes = {
   filterOptions: PropTypes.array,
   filterValues: PropTypes.object,
   setFilters: PropTypes.func,
-  searchCount: PropTypes.number,
   isDisabled: PropTypes.bool,
+};
+
+FilterForm.defaultProps = {
+  filterValues: {},
+  setFilters: x => x,
 };
 
 export default FilterForm;

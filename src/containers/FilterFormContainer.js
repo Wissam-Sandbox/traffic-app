@@ -4,14 +4,14 @@ import {
   isInventoryFetchSuccessfulSelector,
   activeFilterOptionsSelector,
   filterValuesSelector,
-  getFilteredVehiclesSelector,
+  // getFilteredVehiclesSelector,
 } from '../selectors/inventory';
 import { setFilters } from '../actions/creators';
 
 const mapStateToProps = (state) => {
   return {
     isDisabled: state.inventory.isFetching || !isInventoryFetchSuccessfulSelector(state),
-    searchCount: getFilteredVehiclesSelector(state).length,
+    // searchCount: getFilteredVehiclesSelector(state).length, //@TODO: Let's show this total somewhere else!
     filterOptions: activeFilterOptionsSelector(state),
     filterValues: filterValuesSelector(state),
   };
