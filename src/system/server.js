@@ -10,4 +10,8 @@ const CONFIG = {
 
 app.use(express.static(path.join(__dirname, CONFIG.STATICS_PATH)));
 
+app.get('/search', function(req, res){
+  res.sendfile(path, {root: CONFIG.STATICS_PATH});
+});
+
 app.listen(CONFIG.PORT, () => console.log(`Server app listening on port: ${CONFIG.PORT}!`));
