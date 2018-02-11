@@ -16,7 +16,7 @@ const paginate = (data, pageSize, pageNumber) => {
   return data.slice(startIndex, endIndex);
 };
 
-const intersect = (arr1, arr2) => {
+const intersect = (arr1 = [], arr2 = []) => {
   return arr1.filter(i => arr2.includes(i));
 };
 

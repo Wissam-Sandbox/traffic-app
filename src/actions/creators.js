@@ -10,9 +10,9 @@ const fetchInventorySuccess = (data) => ({
   data,
 });
 
-const fetchInventoryFailure = (error) => ({
+const fetchInventoryFailure = (errors) => ({
   type: ACTION_TYPES.FETCH_INVENTORY_FAILURE,
-  error,
+  errors,
 });
 
 const fetchInventory = () => {
@@ -26,8 +26,8 @@ const fetchInventory = () => {
           dispatch(fetchInventorySuccess(indexVehicles(data)));
           dispatch(setFilters(getFiltersFromUrlSelector(getState())));
         },
-        error => {
-          dispatch(fetchInventoryFailure(error));
+        errors => {
+          dispatch(fetchInventoryFailure(errors));
         }
       );
   };
@@ -52,6 +52,8 @@ const changePage = (page) => ({
 });
 
 export {
+  fetchInventorySuccess,
+  fetchInventoryFailure,
   fetchInventory,
   setFilters,
   changePage,

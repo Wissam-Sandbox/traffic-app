@@ -1,34 +1,6 @@
 import { createSelector } from 'reselect';
+import { indexVehiclesByFilterNameAndValue, formatFilterOptions } from './utils';
 import { paginate, computePageCount, intersectAll } from '../utils';
-
-const reduceVehicles = (vehicles) => {
-  return vehicles.reduce((matrix, item) => {
-    const { id, type, brand, colors } = item;
-
-    if (!matrix.types[type]) {
-      matrix.types[type] = [];
-    }
-    matrix.types[type].push(id);
-
-    if (!matrix.brands[brand]) {
-      matrix.brands[brand] = [];
-    }
-    matrix.brands[brand].push(id);
-
-    colors.forEach(color => {
-      if (!matrix.colors[color]) {
-        matrix.colors[color] = [];
-      }
-      matrix.colors[color].push(id);
-    });
-
-    return matrix;
-  }, {
-    types: {},
-    brands: {},
-    colors: {},
-  });
-};
 
 const isInventoryFetchSuccessfulSelector = (state) => !state.inventory.errors.length;
 
@@ -38,24 +10,13 @@ const vehiclesSelector = (state) => Object.values(state.inventory.data.vehicles)
 
 const vehicleIDsSelector = (state) => Object.keys(indexedVehiclesSelector(state)).map(i => parseInt(i, 10));
 
-const filterMappedVehicleIdsSelector = (state) => reduceVehicles(vehiclesSelector(state));
+const filterMappedVehicleIdsSelector = (state) => indexVehiclesByFilterNameAndValue(vehiclesSelector(state));
 
 const filterValuesSelector = (state) => state.inventory.filters;
 
 const getPaginationSelector = (state) => {
   const { pageSize, page } = state.inventory;
-
   return { pageSize, page };
-};
-
-const getFilteredVehicles = (indexedVehicles, vehiclesIds, vehicleIdsIndexedByFilter, filterValues) => {
-  const intersection = intersectAll([
-    intersectAll([...filterValues['types'].map(item => vehicleIdsIndexedByFilter['types'][item]), vehiclesIds]),
-    intersectAll([...filterValues['brands'].map(item => vehicleIdsIndexedByFilter['brands'][item]), vehiclesIds]),
-    intersectAll([...filterValues['colors'].map(item => vehicleIdsIndexedByFilter['colors'][item]), vehiclesIds]),
-  ]);
-
-  return intersection.map(i => indexedVehicles[i]);
 };
 
 const getFilteredVehiclesSelector = createSelector(
@@ -63,7 +24,21 @@ const getFilteredVehiclesSelector = createSelector(
   vehicleIDsSelector,
   filterMappedVehicleIdsSelector,
   filterValuesSelector,
-  getFilteredVehicles,
+  (indexedVehicles, vehiclesIds, vehicleIdsIndexedByFilter, filterValues) => {
+    const intersection = intersectAll([
+      intersectAll(
+        [...filterValues['types'].map(item => vehicleIdsIndexedByFilter['types'][item]), vehiclesIds]
+      ),
+      intersectAll(
+        [...filterValues['brands'].map(item => vehicleIdsIndexedByFilter['brands'][item]), vehiclesIds]
+      ),
+      intersectAll(
+        [...filterValues['colors'].map(item => vehicleIdsIndexedByFilter['colors'][item]), vehiclesIds]
+      ),
+    ]);
+
+    return intersection.map(i => indexedVehicles[i]);
+  }
 );
 
 const getFilteredVehiclesPaginatedSelector = createSelector(
@@ -78,19 +53,9 @@ const getFilteredVehiclesPaginatedSelector = createSelector(
   }
 );
 
-const filterOptionsSelector = (filteredVehiclesMap) => {
-  return Object.keys(filteredVehiclesMap)
-    .map(filterName => {
-      return {
-        name: filterName,
-        options: Object.keys(filteredVehiclesMap[filterName]).map(i => ({ value: i, label: i }))
-      }
-    });
-};
-
 const activeFilterOptionsSelector = createSelector(
-  state => reduceVehicles(getFilteredVehiclesSelector(state)),
-  filterOptionsSelector,
+  state => indexVehiclesByFilterNameAndValue(getFilteredVehiclesSelector(state)),
+  formatFilterOptions,
 );
 
 const getPageCountSelector = createSelector(
@@ -102,6 +67,7 @@ const getPageCountSelector = createSelector(
 );
 
 export {
+  filterMappedVehicleIdsSelector,
   isInventoryFetchSuccessfulSelector,
   vehiclesSelector,
   activeFilterOptionsSelector,

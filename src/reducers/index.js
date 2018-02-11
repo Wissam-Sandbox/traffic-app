@@ -45,7 +45,7 @@ export const inventoryReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         data: initialState.data,
-        errors: [action.errors],
+        errors: action.errors,
         pageSize: initialState.pageSize,
         page: initialState.page,
       };

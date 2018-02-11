@@ -28,6 +28,9 @@ body {
 }
 
 @media only screen and (max-width: $screen-sm) {
+  .wrap {
+    width: auto;
+  }
   .app-root {
     flex-direction: column;
   }
