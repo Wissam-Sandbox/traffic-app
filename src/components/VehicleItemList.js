@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import VehicleItem from './VehicleItem';
 import LoadingScreen from './LoadingScreen';
 import ErrorScreen from './ErrorScreen';
+import ZeroResult from './ZeroResult';
 import '../styles/VehicleItemList.css';
 
 const renderVehicleItems = (vehicles) => (
@@ -24,13 +25,16 @@ const renderVehicleItems = (vehicles) => (
 );
 
 const VehicleItemList = ({ isFetchingData, data, isFetchSuccessful }) => {
-  return isFetchingData
-    ? <LoadingScreen/>
-    : (
-      isFetchSuccessful
-        ? renderVehicleItems(data)
-        : <ErrorScreen/>
-    );
+  if (isFetchingData) {
+    return <LoadingScreen/>;
+  }
+  if (!isFetchSuccessful) {
+    return <ErrorScreen/>;
+  }
+  if (!data.length) {
+    return <ZeroResult/>
+  }
+  return renderVehicleItems(data);
 };
 
 VehicleItemList.propTypes = {

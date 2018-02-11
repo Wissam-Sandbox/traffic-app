@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ColorChip from './ColorChip';
 import '../styles/VehicleItem.css';
 
-const VehicleItem = ({ imageUrl, type, brand, colors }) => {
+const VehicleItem = ({ vehicleId, imageUrl, type, brand, colors }) => {
   return (
     <div className="vehicle-item">
       <div className="vehicle-item__img">
@@ -23,6 +23,7 @@ const VehicleItem = ({ imageUrl, type, brand, colors }) => {
 };
 
 VehicleItem.propTypes = {
+  vehicleId: PropTypes.number,
   imageUrl: PropTypes.string,
   type: PropTypes.string,
   brand: PropTypes.string,

@@ -28,9 +28,9 @@ describe('App action creators', () => {
     it('should return the correct type and passed errors', () => {
       const expected = {
         type: ACTION_TYPES.FETCH_INVENTORY_FAILURE,
-        error: [{ errorKey: 'errorValue' }]
+        errors: [{ errorKey: 'errorValue' }]
       };
-      expect(fetchInventoryFailure(expected.error)).toEqual(expected);
+      expect(fetchInventoryFailure(expected.errors)).toEqual(expected);
     })
   });
 
@@ -57,8 +57,18 @@ describe('App action creators', () => {
         inventory:  { filters: {} },
       });
       store.dispatch(setFilters(expected.filters));
-      console.log(store.getActions());
+      // console.log(store.getActions());
       // ...
+    })
+  });
+
+  describe('changePage', () => {
+    it('should return the correct type', () => {
+      const expected = {
+        type: ACTION_TYPES.CHANGE_PAGE,
+        page: 4,
+      };
+      expect(changePage(4)).toEqual(expected);
     })
   });
 

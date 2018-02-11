@@ -10,6 +10,9 @@ const TRANSLATIONS = {
   },
   'loading.error': {
     'en': 'Error occurred while attempting your search :(',
+  },
+  'data.emptyResultSet': {
+    'en': 'No result found. Please change your search filters or broaden your search.',
   }
 };
 
