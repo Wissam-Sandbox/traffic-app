@@ -52,6 +52,8 @@ const changePage = (page) => ({
 });
 
 export {
+  fetchInventorySuccess,
+  fetchInventoryFailure,
   fetchInventory,
   setFilters,
   changePage,
