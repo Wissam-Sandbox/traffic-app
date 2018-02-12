@@ -1,4 +1,4 @@
-# Traffic Registry App
+# Traffic Catalog :tram: :car: :airplane:
 Traffic/transportation catalog prototype SPA.
 
 ## Getting Started
