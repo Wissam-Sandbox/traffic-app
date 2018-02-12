@@ -6,7 +6,8 @@ const isInventoryFetchSuccessfulSelector = (state) => !state.inventory.errors.le
 
 const indexedVehiclesSelector = (state) => state.inventory.data.vehicles;
 
-const vehiclesSelector = (state) => Object.values(state.inventory.data.vehicles);
+const vehiclesSelector = (state) =>
+  Object.keys(state.inventory.data.vehicles).map(id => state.inventory.data.vehicles[id]);
 
 const vehicleIDsSelector = (state) => Object.keys(indexedVehiclesSelector(state)).map(i => parseInt(i, 10));
 
