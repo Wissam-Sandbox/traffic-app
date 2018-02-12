@@ -18,7 +18,7 @@ Or
 
 ```
 yarn install
-```ß
+```
 
 ## Running the tests
 ```
