@@ -1,7 +1,7 @@
-# Traffic Catalog :tram: :car: :airplane:
+# Traffic Catalog :speedboat: :car: :airplane:
 Traffic/transportation catalog prototype SPA.
 
-## Getting Started
+## :checkered_flag: Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
