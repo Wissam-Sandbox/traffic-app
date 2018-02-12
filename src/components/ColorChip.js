@@ -5,7 +5,7 @@ import '../styles/ColorChip.css';
 const COLOR_CODES = {
   black: '#000000',
   white: '#ffffff',
-  red: '#F44336',
+  red: '#e81123',
   green: '#4CAF50',
   blue: '#2196F3',
   yellow: '#FFEB3B',

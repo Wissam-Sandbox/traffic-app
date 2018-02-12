@@ -20,13 +20,47 @@
 }
 
 .vehicle-item__features {
-  flex: 0 0 60%;
+  flex: 1;
   padding: 10px 20px;
 }
 
 .vehicle-item__brand {
+  @include font-condensed();
   color: $blueDark;
-  @include font-bold();
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: 0.5px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.vehicle-item__type {
+  text-transform: capitalize;
+  @include font-light();
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.vehicle-item__colors {
+  display: flex;
+}
+
+@media only screen and (max-width: $screen-sm) {
+  .vehicle-item {
+    align-items: center;
+    height: 140px;
+  }
+
+  .vehicle-item__brand {
+    font-size: 20px;
+  }
+
+  .vehicle-item__img {
+    flex: 0 0 120px;
+    height: 90px;
+  }
+
+  .vehicle-item__colors {
+    flex-wrap: wrap;
+  }
 }

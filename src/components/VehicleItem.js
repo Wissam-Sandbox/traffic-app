@@ -10,9 +10,9 @@ const VehicleItem = ({ vehicleId, imageUrl, type, brand, colors }) => {
         <img src={imageUrl} alt={brand} />
       </div>
       <div className="vehicle-item__features">
-        <div className="vehicle-item__brand mb-10">{brand}</div>
-        <div className="mb-10">{type}</div>
-        <div style={{ display: 'flex' }}>
+        <div className="vehicle-item__brand">{brand}</div>
+        <div className="vehicle-item__type">{type}</div>
+        <div className="vehicle-item__colors">
           {
             colors.map((color, index) => <ColorChip key={`color-${index}`} colorName={color} />)
           }
