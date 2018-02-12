@@ -1,0 +1,16 @@
+@import "universal";
+@import "mixins";
+
+.search-count {
+  display: flex;
+  margin-bottom: 15px;
+  font-size: 20px;
+  .search-count__digits {
+    color: $dark;
+    margin-right: 5px;
+  }
+  .text-label {
+    @include font-light();
+    color: $grayDark;
+  }
+}

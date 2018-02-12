@@ -1,7 +1,9 @@
 @import "universal";
+@import "mixins";
 
 .select-dropdown {
   .text-label {
+    @include font-regular();
     color: $grayDark;
     margin-bottom: 5px;
   }
@@ -11,6 +13,8 @@
   }
 
   .Select-value {
+    @include font-light();
+    font-size: 14px;
     background-color: $blueNormal;
     color: $white;
     border: none;

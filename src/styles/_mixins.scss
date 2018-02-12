@@ -1,8 +1,3 @@
-@mixin font-bold {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 700;
-}
-
 @mixin font-regular {
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -10,4 +5,8 @@
 @mixin font-light {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
+}
+
+@mixin font-condensed {
+  font-family: 'Roboto Condensed', sans-serif;
 }

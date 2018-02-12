@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
-import FilterForm from '../components/FilterForm';
+import Filters from '../components/Filters';
 import {
   isInventoryFetchSuccessfulSelector,
   activeFilterOptionsSelector,
   filterValuesSelector,
-  // getFilteredVehiclesSelector,
+  getFilteredVehiclesSelector,
 } from '../selectors/inventory';
 import { setFilters } from '../actions/creators';
 
 const mapStateToProps = (state) => {
   return {
     isDisabled: state.inventory.isFetching || !isInventoryFetchSuccessfulSelector(state),
-    // searchCount: getFilteredVehiclesSelector(state).length, //@TODO: Let's show this total somewhere else!
+    searchCount: getFilteredVehiclesSelector(state).length, //@TODO: Let's show this total somewhere else!
     filterOptions: activeFilterOptionsSelector(state),
     filterValues: filterValuesSelector(state),
   };
@@ -28,4 +28,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(FilterForm);
+)(Filters);

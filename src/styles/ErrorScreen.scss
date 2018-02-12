@@ -1,6 +1,7 @@
 @import "universal";
 
 .error-screen {
+  @include font-light();
   background-color: $red;
   color: white;
   padding: 20px;

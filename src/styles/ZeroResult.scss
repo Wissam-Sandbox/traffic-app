@@ -1,6 +1,8 @@
 @import "universal";
+@import "mixins";
 
 .zero-result {
+  @include font-light();
   padding: 20px;
   background-color: $white;
 }

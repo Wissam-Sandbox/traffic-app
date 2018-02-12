@@ -39,10 +39,6 @@ describe('FilterForm', () => {
       expect(renderedComponent.is('div')).toBe(true);
     });
 
-    it('should have the correct className', () => {
-      expect(renderedComponent.hasClass('filter-form')).toBe(true);
-    });
-
     it('should render correct number of select dropdowns', () => {
       expect(renderedComponent.find(SelectDropdown).length).toBe(2);
     });

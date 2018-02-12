@@ -4,7 +4,6 @@ import SelectDropdown from './SelectDropdown';
 import '../styles/FilterForm.css';
 
 const FilterForm = ({ filterOptions, filterValues, setFilters, isDisabled }) => {
-
   const handleChangeFilter = (name, values) => {
     const updatedFilters = {...filterValues};
     updatedFilters[name] = values.map(v => v.value);
@@ -13,7 +12,7 @@ const FilterForm = ({ filterOptions, filterValues, setFilters, isDisabled }) => 
   };
 
   return (
-    <div className="filter-form">
+    <div>
       {
         filterOptions.map(filter => (
           <SelectDropdown
