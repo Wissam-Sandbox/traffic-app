@@ -1,5 +1,6 @@
 import {
-  indexVehiclesByFilterNameAndValue
+  indexVehiclesByFilterNameAndValue,
+  computeResultSetsIntersection,
 } from '../utils';
 
 const VEHICLES = [
@@ -37,5 +38,80 @@ describe('indexVehiclesByFilterNameAndValue', () => {
     expect(
       indexVehiclesByFilterNameAndValue(VEHICLES)
     ).toEqual(expected)
+  });
+});
+
+const VEHICLE_IDS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const VEHICLE_IDS_INDEXED_BY_FILTER = {
+  types: {
+    car: [2, 3, 4, 6, 7, 8, 9],
+    plane: [1, 5, 10],
+  },
+  brands: {
+    chevrolet: [2, 3, 9],
+    dodge: [4, 6, 7, 8],
+    airbus: [5],
+    boeing: [1, 10],
+  },
+  colors: {
+    green: [1, 3, 5, 7, 9],
+    yellow: [2, 4, 6, 8, 10],
+    purple: [3, 6, 9],
+  },
+};
+describe('computeResultSetsIntersection', () => {
+  it('should correctly filter by single filter only', () => {
+    expect(
+      computeResultSetsIntersection(
+        VEHICLE_IDS,
+        VEHICLE_IDS_INDEXED_BY_FILTER,
+        { types: [], brands: [], colors: [] }
+      )
+    ).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    expect(
+      computeResultSetsIntersection(
+        VEHICLE_IDS,
+        VEHICLE_IDS_INDEXED_BY_FILTER,
+        { types: ['car'], brands: [], colors: [] }
+      )
+    ).toEqual([2, 3, 4, 6, 7, 8, 9]);
+    expect(
+      computeResultSetsIntersection(
+        VEHICLE_IDS,
+        VEHICLE_IDS_INDEXED_BY_FILTER,
+        { types: ['car', 'plane'], brands: [], colors: [] }
+      )
+    ).toEqual([]);
+    expect(
+      computeResultSetsIntersection(
+        VEHICLE_IDS,
+        VEHICLE_IDS_INDEXED_BY_FILTER,
+        { types: ['boat'], brands: [], colors: [] }
+      )
+    ).toEqual([]);
+    expect(
+      computeResultSetsIntersection(
+        VEHICLE_IDS,
+        VEHICLE_IDS_INDEXED_BY_FILTER,
+        { types: [], brands: [], colors: ['green', 'yellow'] }
+      )
+    ).toEqual([]);
+  });
+
+  it('should correctly filter by combination of filters', () => {
+    expect(
+      computeResultSetsIntersection(
+        VEHICLE_IDS,
+        VEHICLE_IDS_INDEXED_BY_FILTER,
+        { types: ['plane'], brands: [], colors: ['green'] }
+      )
+    ).toEqual([1, 5]);
+    expect(
+      computeResultSetsIntersection(
+        VEHICLE_IDS,
+        VEHICLE_IDS_INDEXED_BY_FILTER,
+        { types: ['plane'], brands: [], colors: ['green', 'purple'] }
+      )
+    ).toEqual([]);
   });
 });
