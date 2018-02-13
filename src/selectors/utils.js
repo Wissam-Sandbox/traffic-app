@@ -1,3 +1,5 @@
+import { intersectAll } from '../utils';
+
 const indexVehiclesByFilterNameAndValue = (vehicles) => {
   const vehiclesIndexedByFilters = { types: {}, brands: {}, colors: {} };
 
@@ -29,7 +31,21 @@ const formatFilterOptions = (filteredVehiclesMap) => {
     });
 };
 
+const computeResultSetsIntersection = (vehiclesIds, vehicleIdsIndexedByFilter, filterValues) =>
+  intersectAll([
+    intersectAll(
+      [...filterValues['types'].map(item => vehicleIdsIndexedByFilter['types'][item]), vehiclesIds]
+    ),
+    intersectAll(
+      [...filterValues['brands'].map(item => vehicleIdsIndexedByFilter['brands'][item]), vehiclesIds]
+    ),
+    intersectAll(
+      [...filterValues['colors'].map(item => vehicleIdsIndexedByFilter['colors'][item]), vehiclesIds]
+    ),
+  ]);
+
 export {
   indexVehiclesByFilterNameAndValue,
   formatFilterOptions,
+  computeResultSetsIntersection,
 };

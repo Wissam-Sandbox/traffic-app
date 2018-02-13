@@ -5,6 +5,7 @@ import VehicleItemList from '../VehicleItemList';
 import VehicleItem from '../VehicleItem';
 import LoadingScreen from '../LoadingScreen';
 import ErrorScreen from '../ErrorScreen';
+import ZeroResult from '../ZeroResult';
 
 describe('VehicleItemList', () => {
 
@@ -40,6 +41,11 @@ describe('VehicleItemList', () => {
       expect(vehicleItemCollection.length).toEqual(2);
       expect(vehicleItemCollection.get(0).props.vehicleId).toEqual(3);
       expect(vehicleItemCollection.get(1).props.vehicleId).toEqual(4);
+    });
+
+    it('should render ZeroResult if result-set is empty', () => {
+      const renderedComponent = shallow(<VehicleItemList isFetchingData={false} data={[]} isFetchSuccessful={true} />);
+      expect(renderedComponent.containsMatchingElement(<ZeroResult />)).toBe(true);
     });
   });
 

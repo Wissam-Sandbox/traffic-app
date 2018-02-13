@@ -1,6 +1,13 @@
 import { createSelector } from 'reselect';
-import { indexVehiclesByFilterNameAndValue, formatFilterOptions } from './utils';
-import { paginate, computePageCount, intersectAll } from '../utils';
+import {
+  indexVehiclesByFilterNameAndValue,
+  formatFilterOptions,
+  computeResultSetsIntersection,
+} from './utils';
+import {
+  paginate,
+  computePageCount,
+} from '../utils';
 
 const isInventoryFetchSuccessfulSelector = (state) => !state.inventory.errors.length;
 
@@ -26,19 +33,11 @@ const getFilteredVehiclesSelector = createSelector(
   filterMappedVehicleIdsSelector,
   filterValuesSelector,
   (indexedVehicles, vehiclesIds, vehicleIdsIndexedByFilter, filterValues) => {
-    const intersection = intersectAll([
-      intersectAll(
-        [...filterValues['types'].map(item => vehicleIdsIndexedByFilter['types'][item]), vehiclesIds]
-      ),
-      intersectAll(
-        [...filterValues['brands'].map(item => vehicleIdsIndexedByFilter['brands'][item]), vehiclesIds]
-      ),
-      intersectAll(
-        [...filterValues['colors'].map(item => vehicleIdsIndexedByFilter['colors'][item]), vehiclesIds]
-      ),
-    ]);
-
-    return intersection.map(i => indexedVehicles[i]);
+    return computeResultSetsIntersection(
+      vehiclesIds,
+      vehicleIdsIndexedByFilter,
+      filterValues,
+    ).map(i => indexedVehicles[i]);
   }
 );
 
