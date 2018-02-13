@@ -22,11 +22,11 @@ yarn install
 
 ## Running the tests
 ```
-npm run test
+npm run test a
 ```
 Or
 ```
-yarn test
+yarn test a
 ```
 ## :office: Project Structure and Architecture
 - We follow a standard structure for React/Redux single-page JS application.
